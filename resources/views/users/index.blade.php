@@ -21,7 +21,7 @@
                         <div class="col-sm-6 text-sm-right">
                             <div class="mt-sm-0 mt-2">
                                 <a href="{{ Route('users.create') }}" class="btn btn-outline-primary mr-2">
-                                    <img src="img/excel.png" alt="">
+                                    <i class="fa fa-plus"></i>
                                     <span class="ml-2">Crear</span>
                                 </a>
                                 <button class="btn btn-outline-primary mr-2">

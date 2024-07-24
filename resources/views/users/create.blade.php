@@ -16,6 +16,7 @@
                 <div class="card">
                     <form action="{{ Route('users.store') }}" method="post">
                         @csrf
+                        <input type="hidden" name="device_name" value="web">
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-lg-6">

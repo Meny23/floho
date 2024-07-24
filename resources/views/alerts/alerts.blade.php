@@ -8,4 +8,14 @@
             </button>
         </div>
     @endif
+
+    <!-- alert danger -->
+    @if (Session::has('alert-danger'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fa fa-exclamation-circle"></i> <strong>{{ Session::get('alert-danger') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 </div>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MenuRequest;
 use App\Models\Menu;
+use App\Models\MenuType;
 use Illuminate\Http\Request;
 use Spatie\RouteAttributes\Attributes\Resource;
 
@@ -23,15 +25,17 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        return view("menus.create", ["menu_types" => MenuType::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
-        //
+        $menu = Menu::create($request->validated());
+
+        return redirect('menus')->with("alert-success", "Se agrego el menu: " . $menu->name);
     }
 
     /**
@@ -39,7 +43,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        //
+        return $menu;
     }
 
     /**
@@ -47,7 +51,7 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        //
+        return $menu;
     }
 
     /**
@@ -63,6 +67,10 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        $name = $menu->name;
+        
+        $menu->userMenus()->delete();
+        $menu->delete();
+        return redirect('menus')->with("alert-danger", "El menu: " . $name . ", fue eliminado");
     }
 }
