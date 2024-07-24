@@ -3,64 +3,56 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
+use App\Models\User;
 use App\Models\UserMenu;
 use Illuminate\Http\Request;
+use Spatie\RouteAttributes\Attributes\{Resource, Post};
 
+#[Resource("user-menus", only: ["index"])]
 class UserMenuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user = User::findOrFail($request->user_id);
+        $menus = Menu::whereNotIn("id", $user->userMenus->pluck("menu_id"))->get();
+
+        return view("user_menus.index", [
+            "user" => $user,
+            "menus" => $menus
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    #[Post("assign-menus/{user}", name: "user-menus.assig_menus")]
+    public function assignMenus(User $user, Request $request)
     {
-        //
+        $assigned_menus = json_decode($request->assigned_menus);
+
+        if (empty($assigned_menus)) {
+            return back()->with('alert-danger', 'Debe seleccionar un menu');
+        }
+
+        collect($assigned_menus)->map(fn ($menu) => $user->userMenus()->create([
+            "menu_id" => $menu
+        ]));
+
+        return redirect('settings')->with("alert-success", "Menú(s) agregados con exito");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    #[Post("remove-menus/{user}", name: "user-menus.remove_menus")]
+    public function removeMenus(User $user, Request $request)
     {
-        //
-    }
+        $non_assigned_menus = json_decode($request->non_assigned_menus);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(UserMenu $userMenu)
-    {
-        //
-    }
+        if (empty($non_assigned_menus)) {
+            return back()->with("alert-danger", 'Debe seleecionar un menu');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(UserMenu $userMenu)
-    {
-        //
-    }
+        $user->userMenus->whereIn("menu_id", $non_assigned_menus)->each(fn ($menu) => $menu->delete());
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, UserMenu $userMenu)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(UserMenu $userMenu)
-    {
-        //
+        return redirect('settings')->with("alert-danger", "Menú(s) removidos con exito");
     }
 }

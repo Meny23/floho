@@ -12,7 +12,8 @@ class MenuType extends Model
 
     protected $fillable = [
         "name",
-        "position"
+        "position",
+        "icon"
     ];
 
     protected $hidden = [

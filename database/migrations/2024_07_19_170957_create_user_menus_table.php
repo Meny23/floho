@@ -17,8 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger("menu_id");
             $table->foreign("user_id")->references("id")->on("users");
             $table->foreign("menu_id")->references("id")->on("menus");
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 

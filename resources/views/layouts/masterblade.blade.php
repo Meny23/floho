@@ -131,19 +131,25 @@
                                 </div>
                             </div>
                         </li>
+                        <li class="nav-item dropdown d-none d-sm-block">
+                            <a href="{{ Route('settings') }}" class="dropdown-toggle nav-link">
+                                <i class="fa fa-cog"></i>
+                            </a>
+                        </li>
                         <li class="nav-item dropdown has-arrow">
                             <a href="#" class=" nav-link user-link" data-toggle="dropdown">
                                 <span class="user-img">
-                                    <img class="rounded-circle" src="{{ asset('img/user-06.jpg') }}" width="30"
-                                        alt="Admin">
+                                    <i class="fa fa-user"></i>
+                                    {{-- <img class="rounded-circle" src="{{ asset('img/user-06.jpg') }}" width="30"
+                                        alt="Admin"> --}}
                                     <span class="status online"></span>
                                 </span>
                                 <span>{{ Auth::user()->name }}</span>
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">My Profile</a>
+                                <a class="dropdown-item" href="{{ Route('users.my_profile') }}"><i
+                                        class="fa fa-user-circle"></i> Mi perfil</a>
                                 <a class="dropdown-item" href="#">Edit Profile</a>
-                                <a class="dropdown-item" href="inbox.html">Settings</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">Logout</a>
@@ -156,9 +162,8 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
                         aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="{{ Route('users.my_profile') }}">Mi perfil</a>
                         <a class="dropdown-item" href="#">Edit Profile</a>
-                        <a class="dropdown-item" href="inbox.html">Settings</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">Logout</a>

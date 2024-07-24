@@ -22,7 +22,7 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|max:255",
+            "name" => $this->method() == "POST" ? "required|string" : "nullable|string",
             "description" => "string|nullable",
             "image" => "string|nullable"
         ];

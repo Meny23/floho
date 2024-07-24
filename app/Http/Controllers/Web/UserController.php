@@ -7,7 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Spatie\RouteAttributes\Attributes\Resource;
+use Spatie\RouteAttributes\Attributes\{Resource, Get, Prefix};
 
 #[Resource('users')]
 class UserController extends Controller
@@ -68,5 +68,11 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    #[Get("my-profile", name: "users.my_profile")]
+    public function myProfile()
+    {
+        return view("users.my-profile");
     }
 }

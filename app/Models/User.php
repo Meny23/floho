@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Traits\HasActiveColumn;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,6 +24,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        "surname",
+        "second_surname",
         'email',
         'password',
     ];
@@ -45,6 +48,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+    ];
+
+    protected $appends = [
+        "user_name",
     ];
 
     public function userMenus()
@@ -73,5 +80,15 @@ class User extends Authenticatable
     public function checkPassword(string $password): bool
     {
         return Hash::check($password, $this->password);
+    }
+
+    /**
+     * concat full name
+     */
+    protected function userName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->name . " " . $this->surname . " " . $this->second_surname
+        );
     }
 }

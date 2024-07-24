@@ -4,20 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserMenu extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         "user_id",
         "menu_id"
     ];
 
-    protected $hidden = [
-        "deleted_at"
-    ];
+    public $timestamps = false;
 
     public function user()
     {
