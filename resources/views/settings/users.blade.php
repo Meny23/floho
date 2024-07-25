@@ -5,7 +5,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="page-title">
-                            Asignar menús al usuario
+                            Usuarios
                         </div>
                     </div>
                     <div class="col-sm-6 text-sm-right">
@@ -53,7 +53,8 @@
                                         @endforeach
                                     </td>
                                     <td class="text-right">
-                                        <a href="{{ Route('user-menus.index', ['user_id' => $user->id]) }}"
+                                        <a data-toggle="tooltip" data-placement="top" title="Asignación de menus"
+                                            href="{{ Route('user-menus.index', ['user_id' => $user->id]) }}"
                                             class="btn btn-secondary btn-sm mb-1">
                                             <i class="fa fa-th-list"></i>
                                         </a>

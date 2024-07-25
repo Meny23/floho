@@ -51,7 +51,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="2">No hay menus agregados</td>
+                                        <td class="text-center" colspan="2">No hay menus agregados</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -99,7 +99,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="2">No hay menus por asignar</td>
+                                        <td class="text-center" colspan="2">No hay menus por asignar</td>
                                     </tr>
                                 @endforelse
                             </tbody>

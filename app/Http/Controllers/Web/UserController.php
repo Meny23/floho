@@ -51,23 +51,28 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return $user;
+        return view("users.edit", ["user" => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->update($request->validated());
+
+        return redirect("users")->with("alert-success", "Se edito el usuario: " .  $user->user_name);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user_name = $user->user_name;
+        $user->delete();
+
+        return redirect('users')->with("alert-danger", "Se elimino el usuario: " . $user_name);
     }
 
     #[Get("my-profile", name: "users.my_profile")]

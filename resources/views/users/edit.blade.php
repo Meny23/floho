@@ -1,11 +1,11 @@
 @extends('layouts.masterblade')
-@section('title', 'Crear Usuario')
-@section('title-header', 'Crear Usuario')
+@section('title', 'Editar Usuario')
+@section('title-header', 'Editar Usuario')
 @section('breadcrumb')
     @php
         $breadcrumbs = [
             ['name' => 'Usuarios', 'link' => 'users', 'active' => false],
-            ['name' => 'Crear Usuario', 'link' => 'users/create', 'active' => true],
+            ['name' => 'Editar Usuario', 'active' => true],
         ];
     @endphp
 @endsection
@@ -14,7 +14,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <form action="{{ Route('users.store') }}" method="post">
+                    <form action="{{ Route('users.update', $user->id) }}" method="POST">
+                        @method('PUT')
                         @csrf
                         <input type="hidden" name="device_name" value="web">
                         <div class="card-body">
@@ -22,7 +23,7 @@
                                 <div class="col-lg-6">
                                     <label for=""><strong>Nombre</strong></label>
                                     <input class="form-control" type="text" name="name" id="name"
-                                        value="{{ old('name') }}" required>
+                                        value="{{ $user->name }}" required>
                                     @error('name')
                                         <span class="text-danger">
                                             <i class="fa fa-exclamation-circle"></i> {{ $message }}
@@ -32,7 +33,7 @@
                                 <div class="col-lg-6">
                                     <label for=""><strong>Apellido</strong></label>
                                     <input class="form-control" type="text" name="surname" id="surname"
-                                        value="{{ old('surname') }}" required>
+                                        value="{{ $user->surname }}" required>
                                     @error('surname')
                                         <span class="text-danger">
                                             <i class="fa fa-exclamation-circle"></i> {{ $message }}
@@ -44,7 +45,7 @@
                                 <div class="col-lg-6">
                                     <label for=""><strong>Apellido Materno</strong></label>
                                     <input class="form-control" type="text" name="second_surname" id="second_surname"
-                                        value="{{ old('second_surname') }}" required>
+                                        value="{{ $user->second_surname }}" required>
                                     @error('second_surname')
                                         <span class="text-danger">
                                             <i class="fa fa-exclamation-circle"></i> {{ $message }}
@@ -54,7 +55,7 @@
                                 <div class="col-lg-6">
                                     <label for=""><strong>Correo</strong></label>
                                     <input class="form-control" type="email" name="email" id="email"
-                                        value="{{ old('email') }}" required>
+                                        value="{{ $user->email }}" required>
                                     @error('email')
                                         <span class="text-danger">
                                             <i class="fa fa-exclamation-circle"></i> {{ $message }}
@@ -62,30 +63,10 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-lg-6">
-                                    <label for=""><strong>Contraseña</strong></label>
-                                    <input class="form-control" type="password" name="password" id="password" required>
-                                    @if ($errors->has('password'))
-                                        @foreach ($errors->get('password') as $message)
-                                            <div>
-                                                <span class="text-danger"><i class="fa fa-exclamation-circle"></i>
-                                                    {{ $message }}
-                                                </span>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for=""><strong>Confirmar contraseña</strong></label>
-                                    <input class="form-control" type="password" name="password_confirmation"
-                                        id="password_confirmation" required>
-                                </div>
-                            </div>
                             <div class="mb-3">
                                 <div class="d-flex justify-content-center">
                                     <button class="btn btn-outline-success">
-                                        <i class="fa fa-save"></i> Crear
+                                        <i class="fa fa-save"></i> Editar
                                     </button>
                                 </div>
                             </div>

@@ -65,11 +65,17 @@
                                                 class="btn btn-primary btn-sm mb-1">
                                                 <i class="far fa-edit"></i>
                                             </a>
-                                            <button type="submit" data-toggle="modal" data-target="#delete_employee"
+                                            <button type="submit" data-toggle="modal" data-target="#delete_{{ $user->id }}"
                                                 class="btn btn-danger btn-sm mb-1">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </td>
+                                        @include('components.confirm-delete', [
+                                            'title' => 'Usuario',
+                                            'id' => $user->id,
+                                            'record' => $user->user_name,
+                                            'route' => 'users/' . $user->id,
+                                        ])
                                     </tr>
                                 @empty
                                     <tr>

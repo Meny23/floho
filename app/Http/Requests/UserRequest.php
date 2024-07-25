@@ -23,9 +23,11 @@ class UserRequest extends FormRequest
     {
         return [
             "name" => "required|string|max:255",
+            "surname" => "required|string|max:255",
+            "second_surname" => "nullable|string|max:255",
             "email" => $this->method() == "POST" ? "required|email|unique:users,email,NULL,id,deleted_at,NULL" : "email|required",
             "device_name" => "string|required",
-            "password" => "required|confirmed|min:8"
+            "password" => $this->method() == "POST" ? "required|confirmed|min:8" : "nullable"
         ];
     }
 }
