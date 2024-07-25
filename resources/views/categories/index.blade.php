@@ -39,11 +39,12 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table custom-table">
+                        <table id="tbl_categories" class="table custom-table">
                             <thead class="thead-light">
                                 <tr>
                                     <th>Categoria</th>
                                     <th>Descripción</th>
+                                    <th>Imagen</th>
                                     <th class="text-right">Acciones</th>
                                 </tr>
                             </thead>
@@ -56,6 +57,9 @@
                                                 data-target="#edit_{{ $category->id }}">
                                                 <i class="fa fa-flag-checkered"></i>
                                             </button>
+                                        </td>
+                                        <td>
+                                            <img width="50px" src="{{ asset($category->link) }}" alt="">
                                         </td>
                                         <td class="text-right">
                                             <a href="{{ Route('categories.edit', $category->id) }}"

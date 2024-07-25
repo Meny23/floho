@@ -15,7 +15,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ Route('categories.store') }}" method="post">
+                    <form action="{{ Route('categories.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="row mb-3">
@@ -44,7 +44,7 @@
                             <div class="row mb-3">
                                 <div class="col-lg-12">
                                     <label for=""><strong>Descripcion</strong></label>
-                                    <textarea class="form-control" name="description" id="description" cols="30" rows="10"></textarea>
+                                    <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="text-danger">
                                             <i class="fa fa-exclamation-circle"></i> {{ $message }}

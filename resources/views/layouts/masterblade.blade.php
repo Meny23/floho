@@ -156,7 +156,6 @@
                             </div>
                         </li>
                     @endguest
-
                 </ul>
                 <div class="dropdown mobile-user-menu float-right">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
@@ -436,13 +435,11 @@
         </div>
 
     </div>
-
-
+    
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery.slimscroll.js') }}"></script>
-
     <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/fullcalendar.min.js') }}"></script>
@@ -452,6 +449,7 @@
     <script src="{{ asset('js/apexcharts.js') }}"></script>
     <script src="{{ asset('js/chart-data.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    
 </body>
 
 </html>

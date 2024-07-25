@@ -15,7 +15,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ Route('categories.update', $category->id) }}" method="POST">
+                    <form action="{{ Route('categories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                         <div class="card-body">

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryRequest extends FormRequest
 {
@@ -24,7 +25,22 @@ class CategoryRequest extends FormRequest
         return [
             "name" => $this->method() == "POST" ? "required|string" : "nullable|string",
             "description" => "string|nullable",
-            "image" => "string|nullable"
+            "image" => "nullable|image"
         ];
+    }
+
+    public function validated($key = null, $default = null)
+    {
+        $validated = parent::validated($key, $default);
+        $image = $this->file("image");
+        
+        if ($image) {
+            $link = "images/categories";
+            $name = strtolower(str_replace(" ", "", $this->name)) . "." . $image->extension();
+
+            $validated["image"] = Storage::putFileAs($link, $image, $name);
+        }
+
+        return $validated;
     }
 }
