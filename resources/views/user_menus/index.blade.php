@@ -4,7 +4,7 @@
 @section('breadcrumb')
     @php
         $breadcrumbs = [
-            ['name' => 'Ajustes', 'link' => 'settings', 'active' => false],
+            ['name' => 'Usuarios', 'link' => 'users', 'active' => false],
             ['name' => 'Menús del usuario', 'active' => true],
         ];
     @endphp

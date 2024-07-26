@@ -51,11 +51,24 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-3">
                                     <label for=""><strong>Correo</strong></label>
                                     <input class="form-control" type="email" name="email" id="email"
                                         value="{{ old('email') }}" required>
                                     @error('email')
+                                        <span class="text-danger">
+                                            <i class="fa fa-exclamation-circle"></i> {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for=""><strong>Rol</strong></label>
+                                    <select class="form-control" name="role_id" id="role_id">
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('role_id')
                                         <span class="text-danger">
                                             <i class="fa fa-exclamation-circle"></i> {{ $message }}
                                         </span>

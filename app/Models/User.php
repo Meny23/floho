@@ -28,6 +28,7 @@ class User extends Authenticatable
         "second_surname",
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -66,10 +67,15 @@ class User extends Authenticatable
             ->get();
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
     /**
      * provide a new user token
      */
-    public function getToken(string $device_name):string 
+    public function getToken(string $device_name): string 
     {
         return $this->createToken($device_name)->plainTextToken;
     }
@@ -88,7 +94,7 @@ class User extends Authenticatable
     protected function userName(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->name . " " . $this->surname . " " . $this->second_surname
+            get: fn () => ucfirst(strtolower($this->name)) . " " . ucfirst(strtolower($this->surname)) . " " . ucfirst(strtolower($this->second_surname))
         );
     }
 }

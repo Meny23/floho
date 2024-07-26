@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
             "surname" => "Barreras",
             "second_surname" => "Soto",
             "email" => "mbarreras.s@hotmail.com",
-            "password" => Hash::make("floho123")
+            "password" => Hash::make("floho123"),
+            "role_id" => 1
         ]);
     }
 }

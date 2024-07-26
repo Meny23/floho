@@ -161,11 +161,17 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
                         aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="{{ Route('users.my_profile') }}">Mi perfil</a>
-                        <a class="dropdown-item" href="#">Edit Profile</a>
+                        <a class="dropdown-item" href="{{ Route('users.my_profile') }}">
+                            <i class="fa fa-user"></i> Mi perfil
+                        </a>
+                        <a class="dropdown-item" href="{{ Route('settings') }}">
+                            <i class="fa fa-cog"></i> Ajustes
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">Logout</a>
+                                      document.getElementById('logout-form').submit();">
+                            <i class="fa fa-user-times"></i> Logout
+                        </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
@@ -435,7 +441,7 @@
         </div>
 
     </div>
-    
+
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
@@ -449,7 +455,7 @@
     <script src="{{ asset('js/apexcharts.js') }}"></script>
     <script src="{{ asset('js/chart-data.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    
+
 </body>
 
 </html>

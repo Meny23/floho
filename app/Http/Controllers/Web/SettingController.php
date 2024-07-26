@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Spatie\RouteAttributes\Attributes\Get;
 
@@ -12,7 +13,8 @@ class SettingController extends Controller
     public function settings()
     {
         return view("settings.settings", [
-            "users" => User::all()
+            "users" => User::all(),
+            "roles" => Role::all(),
         ]);
     }
 }

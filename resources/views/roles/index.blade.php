@@ -1,9 +1,9 @@
 @extends('layouts.masterblade')
-@section('title', 'Categorias')
-@section('title-header', 'Categorias')
+@section('title', 'Roles')
+@section('title-header', 'Roles')
 @section('breadcrumb')
     @php
-        $breadcrumbs = [['name' => 'Categorias', 'active' => true]];
+        $breadcrumbs = [['name' => 'Roles', 'active' => true]];
     @endphp
 @endsection
 @section('content')
@@ -15,15 +15,23 @@
                     <div class="row align-items-center">
                         <div class="col-sm-6">
                             <div class="page-title">
-                                {{--  --}}
+                                {{-- Todos los usuarios --}}
                             </div>
                         </div>
                         <div class="col-sm-6 text-sm-right">
                             <div class="mt-sm-0 mt-2">
-                                <a href="{{ Route('categories.create') }}" class="btn btn-outline-primary mr-2">
+                                <a href="{{ Route('roles.create') }}" class="btn btn-outline-primary mr-2">
                                     <i class="fa fa-plus"></i>
                                     <span class="ml-2">Crear</span>
                                 </a>
+                                <button class="btn btn-outline-primary mr-2">
+                                    <img src="img/excel.png" alt="">
+                                    <span class="ml-2">Excel</span>
+                                </button>
+                                <button class="btn btn-outline-danger mr-2">
+                                    <img src="img/pdf.png" alt="" height="18">
+                                    <span class="ml-2">PDF</span>
+                                </button>
                                 <button class="btn btn-light" type="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
                                 <div class="dropdown-menu dropdown-menu-right">
@@ -39,65 +47,42 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="tbl_categories" class="table custom-table">
+                        <table class="table custom-table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Categoria</th>
+                                    <th>Rol</th>
                                     <th>Descripción</th>
-                                    <th>Imagen</th>
-                                    <th class="text-right">Acciones</th>
+                                    <th class="text-right">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($categories as $category)
+                                @forelse ($roles as $role)
                                     <tr>
-                                        <td>{{ $category->name }}</td>
-                                        <td>
-                                            <button class="btn btn-secondary" data-toggle="modal"
-                                                data-target="#edit_{{ $category->id }}">
-                                                <i class="fa fa-flag-checkered"></i>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <img data-bs-toggle="tooltip" data-placement="top" title="Ver imagen"
-                                                data-toggle="modal" data-target="#view_image_{{ $category->id }}"
-                                                style="cursor: pointer;" width="50px" src="{{ asset($category->link) }}"
-                                                alt="">
-                                        </td>
+                                        <td>{{ $role->name }}</td>
+                                        <td>{{ $role->description }}</td>
                                         <td class="text-right">
-                                            <a href="{{ Route('categories.edit', $category->id) }}"
+                                            <a href="{{ Route('roles.edit', $role->id) }}"
                                                 class="btn btn-primary btn-sm mb-1">
                                                 <i class="far fa-edit"></i>
                                             </a>
-                                            <button type="submit" data-toggle="modal"
-                                                data-target="#delete_{{ $category->id }}"
+                                            <button type="submit" data-toggle="modal" data-target="#delete_{{ $role->id }}"
                                                 class="btn btn-danger btn-sm mb-1">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>
                                         </td>
                                         @include('components.confirm-delete', [
-                                            'id' => $category->id,
-                                            'title' => '¿Desea eliminar la categoria?',
-                                            'record' => $category->name,
-                                            'route' => 'categories/' . $category->id,
-                                        ])
-                                        @include('components.edit-description', [
-                                            'id' => $category->id,
-                                            'item' => $category,
-                                            'route' => 'categories/' . $category->id,
-                                        ])
-                                        @include('components.view-image', [
-                                            'id' => $category->id,
-                                            'title' => $category->name,
-                                            'link' => $category->link,
-                                            'modal_size' => 'modal-lg',
+                                            'title' => 'Rol',
+                                            'id' => $role->id,
+                                            'record' => $role->name,
+                                            'route' => 'roles/' . $role->id,
                                         ])
                                     </tr>
                                 @empty
                                     <tr>
-                                        <th colspan="3">No hay categorias</th>
+                                        <th colspan="3">No hay Roles</th>
                                     </tr>
                                 @endforelse
+                            </tbody>
                         </table>
                     </div>
                 </div>

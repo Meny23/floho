@@ -30,7 +30,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-3">
                                     <label for=""><strong>Apellido</strong></label>
                                     <input class="form-control" type="text" name="surname" id="surname"
                                         value="{{ $user->surname }}" required>
@@ -40,13 +40,27 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-lg-6">
+                                <div class="col-lg-3">
                                     <label for=""><strong>Apellido Materno</strong></label>
                                     <input class="form-control" type="text" name="second_surname" id="second_surname"
                                         value="{{ $user->second_surname }}" required>
                                     @error('second_surname')
+                                        <span class="text-danger">
+                                            <i class="fa fa-exclamation-circle"></i> {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-6">
+                                    <label for=""><strong>Rol</strong></label>
+                                    <select class="form-control" name="role_id" id="role_id">
+                                        @foreach ($roles as $role)
+                                            <option {!! $role->id == $user->role_id ? 'selected' : '' !!} value="{{ $role->id }}">{{ $role->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('role_id')
                                         <span class="text-danger">
                                             <i class="fa fa-exclamation-circle"></i> {{ $message }}
                                         </span>

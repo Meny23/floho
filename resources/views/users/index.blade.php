@@ -51,6 +51,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Usuario</th>
+                                    <th>Rol</th>
                                     <th>Email</th>
                                     <th class="text-right">Action</th>
                                 </tr>
@@ -58,14 +59,23 @@
                             <tbody>
                                 @forelse ($users as $user)
                                     <tr>
-                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->user_name }}</td>
+                                        <td>
+                                            <span class="badge badge-success">{{ $user->role->name }}</span>
+                                        </td>
                                         <td>{{ $user->email }}</td>
                                         <td class="text-right">
-                                            <a href="{{ Route('users.edit', $user->id) }}"
+                                            <a data-toggle="tooltip" data-placement="top" title="Asignación de menus"
+                                                href="{{ Route('user-menus.index', ['user_id' => $user->id]) }}"
+                                                class="btn btn-secondary btn-sm mb-1">
+                                                <i class="fa fa-th-list"></i>
+                                            </a>
+                                            <a data-toggle="tooltip" data-placement="top" title="Editar" href="{{ Route('users.edit', $user->id) }}"
                                                 class="btn btn-primary btn-sm mb-1">
                                                 <i class="far fa-edit"></i>
                                             </a>
-                                            <button type="submit" data-toggle="modal" data-target="#delete_{{ $user->id }}"
+                                            <button type="button" data-toggle="modal"
+                                                data-target="#delete_{{ $user->id }}"
                                                 class="btn btn-danger btn-sm mb-1">
                                                 <i class="far fa-trash-alt"></i>
                                             </button>

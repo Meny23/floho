@@ -27,7 +27,8 @@ class UserRequest extends FormRequest
             "second_surname" => "nullable|string|max:255",
             "email" => $this->method() == "POST" ? "required|email|unique:users,email,NULL,id,deleted_at,NULL" : "email|required",
             "device_name" => "string|required",
-            "password" => $this->method() == "POST" ? "required|confirmed|min:8" : "nullable"
+            "password" => $this->method() == "POST" ? "required|confirmed|min:8" : "nullable",
+            "role_id" => "required|exists:roles,id|integer"
         ];
     }
 }
