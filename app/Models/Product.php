@@ -7,23 +7,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        "category_id",
         "name",
+        "code",
         "description",
-        "image"
+        "image",
+    ];
+
+    protected $appends = [
+        "link",
     ];
 
     protected $hidden = [
         "deleted_at"
     ];
 
-    protected $appends = [
-        "link",
-    ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     protected function link(): Attribute
     {
